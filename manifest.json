@@ -22,7 +22,7 @@
     }
   },
   "chrome_url_overrides": {
-    "newtab": "build/index.html"
+    "newtab": "public/index.html"
   },
   "short_name": "daily_blockchain"
 }
