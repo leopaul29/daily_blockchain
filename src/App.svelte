@@ -29,15 +29,15 @@
   //   rssBody = { ...rssBody, rss };
   // })();
 
-  // let users;
+  let users;
 
-  // onMount(async () => {
-  //   const res = await fetch(jdcFeed, { mode: "no-cors" });
-  //   users = await res.xml();
-  //   console.log("res ", users)
-  //   // fetch(jdcFeed, { mode: "no-cors" })
-  //   // .then((response)=> console.log(response))
-  // });
+  onMount(async () => {
+    const res = await fetch(jdcFeed, { mode: "no-cors" });
+    users = await res.xml();
+    console.log("res ", users)
+    // fetch(jdcFeed, { mode: "no-cors" })
+    // .then((response)=> console.log(response))
+  });
   export let name;
 </script>
 
