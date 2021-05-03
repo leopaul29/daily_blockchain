@@ -34,6 +34,26 @@ const app = express();
 
 // A sample route
 app.get("/", (req, res) => res.send("Hello World!"));
+
+app.get("/cryptoast", (req, res) => {
+  (async () => {
+    let url = "https://cryptoast.fr/feed/";
+    let parser = new Parser();
+    let data = await parser.parseURL(url);
+    let rssTitle = data.title;
+    let rssItems = [];
+
+    data.items.map((item) => {
+      rssItems.push({ title: item.title, link: item.link });
+    });
+
+    let rss = { title: rssTitle, posts: rssItems };
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.write(JSON.stringify(rss));
+    res.end();
+  })();
+});
+
 app.get("/feed", (req, res) => {
   console.log("server response");
 
