@@ -1,43 +1,22 @@
 <script>
   import { onMount } from "svelte";
-  const jdcFeed = "https://journalducoin.com/feed/";
-
-  // let rss;
-  // onMount(async () => {
-  //   const response = await fetch(cryptoasFeed);
-  //   const data = response.json();
-
-  //   rss = data;
-  // });
-  // // import {Parser} from "rss-parser";
-
-  // const cryptoasFeed = "https://cryptoast.fr/feed/";
-  // const jdcFeed = "https://journalducoin.com/feed/";
-
-  // // let parser = new Parser();
-  // let rssBody = (async () => {
-  //   let feed = await fetch(cryptoasFeed); //parser.parseURL(cryptoasFeed);
-
-  //   let rssTemp = [];
-  //   let rssTitle = feed.title;
-
-  //   feed.items.forEach((item) => {
-  //     rssTemp.push(item.title);
-  //   });
-
-  //   let rss = { title: rssTitle, posts: rssTemp };
-  //   rssBody = { ...rssBody, rss };
-  // })();
-
-  let users;
+  import Parser from "rss-parser";
 
   onMount(async () => {
-    const res = await fetch(jdcFeed, { mode: "no-cors" });
-    users = await res.xml();
-    console.log("res ", users)
-    // fetch(jdcFeed, { mode: "no-cors" })
-    // .then((response)=> console.log(response))
-  });
+    let url = "https://cryptoast.fr/feed/";
+    let parser = new Parser();
+    let data = await parser.parseURL(url);
+    let rssTitle = data.title;
+    let rssItems = [];
+
+    data.items.map((item) => {
+      rssItems.push({ title: item.title, link: item.link });
+    });
+
+    rss = { title: rssTitle, posts: rssItems };
+    console.log("rss", rss);
+  })();
+
   export let name;
 </script>
 
@@ -48,7 +27,6 @@
     how to build Svelte apps.
   </p>
   <p>test for a build</p>
-  {users}
 </main>
 <footer>
   <div>
