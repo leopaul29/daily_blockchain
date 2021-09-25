@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  /*import { onMount } from "svelte";
   import Parser from "rss-parser";
 
   onMount(async () => {
@@ -15,7 +15,7 @@
 
     rss = { title: rssTitle, posts: rssItems };
     console.log("rss", rss);
-  })();
+  })();*/
 
   export let name;
 </script>
