@@ -1,16 +1,16 @@
 // Implementations for all the calls for the rss endpoints.
-import Api from "../services/Api";
-import Parser from "rss-parser";
+import Api from "./api";
+//import Parser from "rss-parser";
 
-const cryptoastULR = "https://cryptoast.fr/feed/";
+/*const cryptoastULR = "https://cryptoast.fr/feed/";
 
 // Method to get a list of all Pokemon
 export const getCryptoast = async () => {
   try {
-    //const response = await Api.get(cryptoastULR);
-    //return response.results;
+    const response = await Api.get(cryptoastULR);
+    return response.results;
 
-    let parser = new Parser();
+    /*let parser = new Parser();
     let data = await parser.parseURL(cryptoastULR);
     let rssTitle = data.title;
     let rssItems = [];
@@ -20,11 +20,11 @@ export const getCryptoast = async () => {
     });
 
     rss = { title: rssTitle, posts: rssItems };
-    console.log("rss", rss);
-  } catch (error) {
+    console.log("rss", rss);*/
+  /*} catch (error) {
     console.error(error);
   }
-};
+};*/
 
 /*import { onMount } from "svelte";
   import Parser from "rss-parser";
@@ -43,3 +43,28 @@ export const getCryptoast = async () => {
     rss = { title: rssTitle, posts: rssItems };
     console.log("rss", rss);
   })();*/
+
+
+  // pokemon.js
+// Implementations for all the calls for the pokemon endpoints.
+
+
+// Method to get a list of all Pokemon
+export const getPokemonList = async () => {
+    try {
+      const response = await Api.get("/pokemon?limit=500");
+      return response.results;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+// Get a pokemon details by name
+export const getPokemonByName = async(name) => {
+    try {
+      const response = await Api.get(`/pokemon/${name}`);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+};

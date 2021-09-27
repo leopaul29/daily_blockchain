@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+  import { getPokemonList, getPokemonByName } from "./services/Api/rss";
   /*import { onMount } from "svelte";
   import Parser from "rss-parser";
 
@@ -17,6 +19,18 @@
     console.log("rss", rss);
   })();*/
 
+  /*let feed = [];
+  onMount(async () => {
+    const res = await getCryptoast();
+    feed = res;
+  });*/
+  // Get the data from the api, after the page is mounted.
+  let pokemonList = [];
+  onMount(async () => {
+    const res = await getPokemonList();
+    pokemonList = res;
+  });
+
   export let name;
 </script>
 
@@ -27,6 +41,9 @@
     how to build Svelte apps.
   </p>
   <p>test for a build</p>
+  <div class="feed">
+    {pokemonList}
+  </div>
 </main>
 <footer>
   <div>
