@@ -1,60 +1,23 @@
 <script>
   import { onMount } from "svelte";
   import { getPokemonList, getPokemonByName } from "./services/Api/rss";
-  /*import { onMount } from "svelte";
-  import Parser from "rss-parser";
 
-  onMount(async () => {
-    let url = "https://cryptoast.fr/feed/";
-    let parser = new Parser();
-    let data = await parser.parseURL(url);
-    let rssTitle = data.title;
-    let rssItems = [];
-
-    data.items.map((item) => {
-      rssItems.push({ title: item.title, link: item.link });
-    });
-
-    rss = { title: rssTitle, posts: rssItems };
-    console.log("rss", rss);
-  })();*/
-
-  /*let feed = [];
-  onMount(async () => {
-    const res = await getCryptoast();
-    feed = res;
-  });*/
   // Get the data from the api, after the page is mounted.
   let pokemonList = [];
   onMount(async () => {
     const res = await getPokemonList();
     pokemonList = res;
   });
-
-  export let name;
 </script>
 
 <main>
-  <h1>Hello {name}!</h1>
-  <p>
-    Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-    how to build Svelte apps.
-  </p>
-  <p>test for a build</p>
-  <div class="feed">
-    {pokemonList}
-  </div>
+  <h1>Crypto marketcap</h1>
+  <ul>
+    {#each pokemonList as item, i (item.id)}
+      <li>{item.id} : {item.symbol} - {item.current_price}</li>
+    {/each}
+  </ul>
 </main>
-<footer>
-  <div>
-    Icons made by <a
-      href="https://www.flaticon.com/authors/good-ware"
-      title="Good Ware">Good Ware</a
-    >
-    from
-    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-  </div>
-</footer>
 
 <style>
   main {
