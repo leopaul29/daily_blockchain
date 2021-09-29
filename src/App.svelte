@@ -1,22 +1,32 @@
 <script>
   import { onMount } from "svelte";
-  import { getPokemonList, getPokemonByName } from "./services/Api/rss";
+  import { getTop20Marketcap, getSearchTrend } from "./services/Api/coingecko";
 
   // Get the data from the api, after the page is mounted.
-  let pokemonList = [];
+  let top20Marketcap = [];
   onMount(async () => {
-    const res = await getPokemonList();
-    pokemonList = res;
+    const res = await getTop20Marketcap();
+    top20Marketcap = res;
+  });
+
+  // Get the data from the api, after the page is mounted.
+  let searchTrend = [];
+  onMount(async () => {
+    const res = await getSearchTrend();
+    searchTrend = res;
   });
 </script>
 
 <main>
-  <h1>Crypto marketcap</h1>
-  <ul>
-    {#each pokemonList as item, i (item.id)}
-      <li>{item.id} : {item.symbol} - {item.current_price}</li>
+  <h1>Crypto trend</h1>
+  <div class="tab">
+    {#each top20Marketcap as item (item.id)}
+      <div class="tab-item">
+        <div class="coin">{item.symbol}</div>
+        <div class="price">{item.current_price}</div>
+      </div>
     {/each}
-  </ul>
+  </div>
 </main>
 
 <style>
@@ -34,6 +44,16 @@
     font-weight: 100;
   }
 
+  .tab {
+    display: flex;
+    flex-direction: column;
+  }
+  .tab-item {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+  }
   @media (min-width: 640px) {
     main {
       max-width: none;
