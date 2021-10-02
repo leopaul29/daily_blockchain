@@ -8,13 +8,6 @@
     const res = await getTop20Marketcap();
     top20Marketcap = res;
   });
-
-  // Get the data from the api, after the page is mounted.
-  let searchTrend = [];
-  onMount(async () => {
-    const res = await getSearchTrend();
-    searchTrend = res;
-  });
 </script>
 
 <main>
