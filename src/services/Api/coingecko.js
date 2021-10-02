@@ -23,14 +23,3 @@ export const getCoinById = async (id) => {
     console.error(error);
   }
 };
-
-// Get a list of search trend crypto
-export const getSearchTrend = async () => {
-  try {
-    const response = await Api.get(`/search/trending`);
-    await console.log(response);
-    return response.coins;
-  } catch (error) {
-    console.error(error);
-  }
-};
