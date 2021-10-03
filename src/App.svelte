@@ -1,25 +1,10 @@
 <script>
-  import { onMount } from "svelte";
-  import { getTop20Marketcap, getSearchTrend } from "./services/Api/coingecko";
-
-  // Get the data from the api, after the page is mounted.
-  let top20Marketcap = [];
-  onMount(async () => {
-    const res = await getTop20Marketcap();
-    top20Marketcap = res;
-  });
+  import CryptoTab from "./CryptoTab.svelte";
 </script>
 
 <main>
-  <h1>Crypto trend</h1>
-  <div class="tab">
-    {#each top20Marketcap as item (item.id)}
-      <div class="tab-item">
-        <div class="coin">{item.symbol}</div>
-        <div class="price">{item.current_price}</div>
-      </div>
-    {/each}
-  </div>
+  <h1>Crypto TOP20 Marketcap</h1>
+  <CryptoTab />
 </main>
 
 <style>
@@ -37,16 +22,6 @@
     font-weight: 100;
   }
 
-  .tab {
-    display: flex;
-    flex-direction: column;
-  }
-  .tab-item {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-
-  }
   @media (min-width: 640px) {
     main {
       max-width: none;
