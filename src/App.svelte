@@ -9,7 +9,6 @@
 
 <style>
   main {
-    text-align: center;
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
@@ -20,6 +19,7 @@
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
+    text-align: center;
   }
 
   @media (min-width: 640px) {
